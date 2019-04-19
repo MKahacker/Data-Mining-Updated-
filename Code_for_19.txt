@@ -1,0 +1,45 @@
+x1 = np.array([1,1,1,1])
+y1 = np.array([2,2,2,2])
+x2 = np.array([0,1,0,1])
+y2 = np.array([1,0,1,0])
+x3 = np.array([0,-1,0,1])
+y3 = np.array([1,0,-1,0])
+x4 = np.array([1,1,0,1,0,1])
+y4 = np.array([1,1,1,0,0,1])
+x5 = np.array([2,-1,0,2,0,-3])
+y5 = np.array([-1,1,-1,0,0,-1])
+
+def my_jaccard(x, y):
+    f1 = 0
+    tot = len(x)
+    for i in range(len(x)):
+        if x[i] == 1 and x[i] == y[i]:
+            f1 = f1 +1
+    
+    for k in range(len(x)):
+        if x[k] == 0 and y[k] == x[k]:
+            tot = tot-1
+            
+    return f1/tot
+
+
+
+print(np.dot(x1, y1)/((np.linalg.norm(x1))*(np.linalg.norm(y1))))
+print(np.corrcoef(x1,y1))
+print(np.linalg.norm(y1 - x1))
+print()
+print(np.dot(x2, y2)/((np.linalg.norm(x2))*(np.linalg.norm(y2))))
+print(np.corrcoef(x2,y2))
+print(np.linalg.norm(y2 - x2))
+print(my_jaccard(x2, y2))
+print()
+print(np.dot(x3, y3)/((np.linalg.norm(x3))*(np.linalg.norm(y3))))
+print(np.corrcoef(x3,y3))
+print(np.linalg.norm(y3 - x3))
+print()
+print(np.dot(x4, y4)/((np.linalg.norm(x4))*(np.linalg.norm(y4))))
+print(np.corrcoef(x4,y4))
+print(my_jaccard(x4, y4))
+print()
+print(np.dot(x5, y5)/((np.linalg.norm(x5))*(np.linalg.norm(y5))))
+print(np.corrcoef(x5,y5))

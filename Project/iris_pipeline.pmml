@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header>
+		<Application name="JPMML-SkLearn" version="1.5.13"/>
+		<Timestamp>2019-04-11T03:13:36Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension>PMMLPipeline(steps=[('mapper', DataFrameMapper(default=False, df_out=False,
+        features=[(array(['sepal_length', 'sepal_width', 'petal_length', 'petal_width'],
+      dtype=object), [ContinuousDomain(high_value=None, invalid_value_replacement=None,
+         invalid_value_treatment='return_invalid', low_value=None,
+         missing_value_replacement=None, missing_value_treatment...nan, strategy='mean',
+       verbose=0), StandardScaler(copy=True, with_mean=True, with_std=True)])],
+        input_df=False, sparse=False)),
+       ('pca', PCA(copy=True, iterated_power='auto', n_components=3, random_state=None,
+  svd_solver='auto', tol=0.0, whiten=False)),
+       ('selector', SelectKBest(k=2, score_func=&lt;function f_classif at 0x7f0e58ca47b8&gt;)),
+       ('classifier', DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best'))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="species" optype="categorical" dataType="integer">
+			<Value value="0"/>
+			<Value value="1"/>
+			<Value value="2"/>
+		</DataField>
+		<DataField name="sepal_length" optype="continuous" dataType="double">
+			<Interval closure="closedClosed" leftMargin="4.4" rightMargin="7.9"/>
+			<Value value="NaN" property="missing"/>
+		</DataField>
+		<DataField name="sepal_width" optype="continuous" dataType="double">
+			<Interval closure="closedClosed" leftMargin="2.0" rightMargin="4.4"/>
+			<Value value="NaN" property="missing"/>
+		</DataField>
+		<DataField name="petal_length" optype="continuous" dataType="double">
+			<Interval closure="closedClosed" leftMargin="1.0" rightMargin="6.7"/>
+			<Value value="NaN" property="missing"/>
+		</DataField>
+		<DataField name="petal_width" optype="continuous" dataType="double">
+			<Interval closure="closedClosed" leftMargin="0.1" rightMargin="2.5"/>
+			<Value value="NaN" property="missing"/>
+		</DataField>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="standard_scaler(sepal_length)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="sepal_length"/>
+					<Constant dataType="double">5.800952380952381</Constant>
+				</Apply>
+				<Constant dataType="double">0.7985099502132513</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="standard_scaler(sepal_width)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="sepal_width"/>
+					<Constant dataType="double">3.052380952380952</Constant>
+				</Apply>
+				<Constant dataType="double">0.4482973583927861</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="standard_scaler(petal_length)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="petal_length"/>
+					<Constant dataType="double">3.723809523809524</Constant>
+				</Apply>
+				<Constant dataType="double">1.6874056620980995</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="standard_scaler(petal_width)" optype="continuous" dataType="double">
+			<Apply function="/">
+				<Apply function="-">
+					<FieldRef field="petal_width"/>
+					<Constant dataType="double">1.1923809523809523</Constant>
+				</Apply>
+				<Constant dataType="double">0.7463811407426073</Constant>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="pca@1[0]" optype="continuous" dataType="double">
+			<Apply function="sum">
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(sepal_length)"/>
+						<Constant dataType="double">-4.2928623618839387E-16</Constant>
+					</Apply>
+					<Constant dataType="double">0.5209782542863685</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(sepal_width)"/>
+						<Constant dataType="double">3.6002946655701505E-16</Constant>
+					</Apply>
+					<Constant dataType="double">-0.22417153915840599</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(petal_length)"/>
+						<Constant dataType="double">-3.3835368369528583E-17</Constant>
+					</Apply>
+					<Constant dataType="double">0.5892676960020828</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(petal_width)"/>
+						<Constant dataType="double">5.709718412357947E-17</Constant>
+					</Apply>
+					<Constant dataType="double">0.5754062582562653</Constant>
+				</Apply>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="pca@1[1]" optype="continuous" dataType="double">
+			<Apply function="sum">
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(sepal_length)"/>
+						<Constant dataType="double">-4.2928623618839387E-16</Constant>
+					</Apply>
+					<Constant dataType="double">0.38407205365967984</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(sepal_width)"/>
+						<Constant dataType="double">3.6002946655701505E-16</Constant>
+					</Apply>
+					<Constant dataType="double">0.9232377385910421</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(petal_length)"/>
+						<Constant dataType="double">-3.3835368369528583E-17</Constant>
+					</Apply>
+					<Constant dataType="double">9.718219513894624E-4</Constant>
+				</Apply>
+				<Apply function="*">
+					<Apply function="-">
+						<FieldRef field="standard_scaler(petal_width)"/>
+						<Constant dataType="double">5.709718412357947E-17</Constant>
+					</Apply>
+					<Constant dataType="double">0.010944916675298972</Constant>
+				</Apply>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="float(pca@1[0])" optype="continuous" dataType="float">
+			<FieldRef field="pca@1[0]"/>
+		</DerivedField>
+		<DerivedField name="double(float(pca@1[0]))" optype="continuous" dataType="double">
+			<FieldRef field="float(pca@1[0])"/>
+		</DerivedField>
+		<DerivedField name="float(pca@1[1])" optype="continuous" dataType="float">
+			<FieldRef field="pca@1[1]"/>
+		</DerivedField>
+		<DerivedField name="double(float(pca@1[1]))" optype="continuous" dataType="double">
+			<FieldRef field="float(pca@1[1])"/>
+		</DerivedField>
+	</TransformationDictionary>
+	<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+		<MiningSchema>
+			<MiningField name="species" usageType="target"/>
+			<MiningField name="sepal_length" missingValueReplacement="5.800952380952381" missingValueTreatment="asMean"/>
+			<MiningField name="sepal_width" missingValueReplacement="3.052380952380952" missingValueTreatment="asMean"/>
+			<MiningField name="petal_length" missingValueReplacement="3.723809523809524" missingValueTreatment="asMean"/>
+			<MiningField name="petal_width" missingValueReplacement="1.1923809523809523" missingValueTreatment="asMean"/>
+		</MiningSchema>
+		<Output>
+			<OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+			<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+			<OutputField name="probability(2)" optype="continuous" dataType="double" feature="probability" value="2"/>
+		</Output>
+		<ModelStats>
+			<UnivariateStats field="sepal_length">
+				<Counts totalFreq="105.0" missingFreq="0.0" invalidFreq="0.0"/>
+				<NumericInfo minimum="4.4" maximum="7.9" mean="5.800952380952379" standardDeviation="0.7985099502132517" median="5.7" interQuartileRange="1.2000000000000002"/>
+			</UnivariateStats>
+			<UnivariateStats field="sepal_width">
+				<Counts totalFreq="105.0" missingFreq="0.0" invalidFreq="0.0"/>
+				<NumericInfo minimum="2.0" maximum="4.4" mean="3.052380952380953" standardDeviation="0.448297358392786" median="3.0" interQuartileRange="0.5"/>
+			</UnivariateStats>
+			<UnivariateStats field="petal_length">
+				<Counts totalFreq="105.0" missingFreq="0.0" invalidFreq="0.0"/>
+				<NumericInfo minimum="1.0" maximum="6.7" mean="3.7238095238095235" standardDeviation="1.6874056620980993" median="4.3" interQuartileRange="3.4"/>
+			</UnivariateStats>
+			<UnivariateStats field="petal_width">
+				<Counts totalFreq="105.0" missingFreq="0.0" invalidFreq="0.0"/>
+				<NumericInfo minimum="0.1" maximum="2.5" mean="1.1923809523809528" standardDeviation="0.7463811407426076" median="1.3" interQuartileRange="1.5"/>
+			</UnivariateStats>
+		</ModelStats>
+		<Node>
+			<True/>
+			<Node score="0" recordCount="34.0">
+				<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="-1.1897878050804138"/>
+				<ScoreDistribution value="0" recordCount="34.0"/>
+				<ScoreDistribution value="1" recordCount="0.0"/>
+				<ScoreDistribution value="2" recordCount="0.0"/>
+			</Node>
+			<Node>
+				<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="0.9933924973011017"/>
+				<Node>
+					<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="-1.5270840525627136"/>
+					<Node score="1" recordCount="4.0">
+						<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="-1.627769649028778"/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="4.0"/>
+						<ScoreDistribution value="2" recordCount="0.0"/>
+					</Node>
+					<Node score="2" recordCount="1.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+						<ScoreDistribution value="2" recordCount="1.0"/>
+					</Node>
+				</Node>
+				<Node score="1" recordCount="26.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="0.0"/>
+					<ScoreDistribution value="1" recordCount="26.0"/>
+					<ScoreDistribution value="2" recordCount="0.0"/>
+				</Node>
+			</Node>
+			<Node>
+				<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="1.4527508616447449"/>
+				<Node>
+					<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="0.18914159946143627"/>
+					<Node>
+						<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="-0.8036805391311646"/>
+						<Node score="1" recordCount="2.0">
+							<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="1.2168574929237366"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="2.0"/>
+							<ScoreDistribution value="2" recordCount="0.0"/>
+						</Node>
+						<Node score="2" recordCount="2.0">
+							<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="-1.0329685807228088"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+							<ScoreDistribution value="2" recordCount="2.0"/>
+						</Node>
+						<Node score="1" recordCount="1.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+							<ScoreDistribution value="2" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="1.2723556756973267"/>
+						<Node score="2" recordCount="4.0">
+							<SimplePredicate field="double(float(pca@1[0]))" operator="lessOrEqual" value="1.1129486560821533"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+							<ScoreDistribution value="2" recordCount="4.0"/>
+						</Node>
+						<Node score="2" recordCount="3.0">
+							<SimplePredicate field="double(float(pca@1[1]))" operator="lessOrEqual" value="-0.2484043911099434"/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="0.0"/>
+							<ScoreDistribution value="2" recordCount="3.0"/>
+						</Node>
+						<Node score="1" recordCount="1.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="0.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+							<ScoreDistribution value="2" recordCount="0.0"/>
+						</Node>
+					</Node>
+					<Node score="1" recordCount="1.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="0.0"/>
+						<ScoreDistribution value="1" recordCount="1.0"/>
+						<ScoreDistribution value="2" recordCount="0.0"/>
+					</Node>
+				</Node>
+				<Node score="1" recordCount="4.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="0.0"/>
+					<ScoreDistribution value="1" recordCount="4.0"/>
+					<ScoreDistribution value="2" recordCount="0.0"/>
+				</Node>
+			</Node>
+			<Node score="2" recordCount="22.0">
+				<True/>
+				<ScoreDistribution value="0" recordCount="0.0"/>
+				<ScoreDistribution value="1" recordCount="0.0"/>
+				<ScoreDistribution value="2" recordCount="22.0"/>
+			</Node>
+		</Node>
+	</TreeModel>
+</PMML>

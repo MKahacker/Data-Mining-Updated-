@@ -1,0 +1,73 @@
+{% set name = "mlxtend" %}
+{% set version = "0.15.0.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "f59cadf199563fdaa0bfeff2327de4dc49571c22f92140ed0e5e1135723aded9" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - scipy >=0.17
+    - numpy >=1.10.4
+    - pandas >=0.17.1
+    - scikit-learn >=0.18
+    - matplotlib >=1.5.1
+    - setuptools
+  run:
+    - python
+    - scipy >=0.17
+    - numpy >=1.10.4
+    - pandas >=0.17.1
+    - scikit-learn >=0.18
+    - matplotlib >=1.5.1
+    - setuptools
+
+test:
+  imports:
+    - mlxtend
+    - mlxtend._base
+    - mlxtend.classifier
+    - mlxtend.cluster
+    - mlxtend.data
+    - mlxtend.evaluate
+    - mlxtend.externals
+    - mlxtend.externals.pyprind
+    - mlxtend.feature_extraction
+    - mlxtend.feature_selection
+    - mlxtend.file_io
+    - mlxtend.frequent_patterns
+    - mlxtend.image
+    - mlxtend.math
+    - mlxtend.plotting
+    - mlxtend.preprocessing
+    - mlxtend.regressor
+    - mlxtend.text
+    - mlxtend.utils
+
+about:
+  home: https://github.com/rasbt/mlxtend
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Machine Learning Library Extensions
+  description: "\n\nA library of Python tools and extensions for data science.\n\n\nContact\n=============\n\nIf you have any questions or comments about mlxtend,\nplease feel free to contact me via\neMail:\
+    \ mail@sebastianraschka.com\nor Twitter: https://twitter.com/rasbt\n\nThis project is hosted at https://github.com/rasbt/mlxtend\n\nThe documentation can be found at http://rasbt.github.io/mlxtend/\n\
+    \n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
